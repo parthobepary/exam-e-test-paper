@@ -18,6 +18,8 @@
     "vuetify": "^3.1.15"
   },
   "dependencies": {
-    "vite-plugin-vuetify": "^1.0.2"
+    "vite-plugin-vuetify": "^1.0.2",
+    "katex": "^0.16.4",
+    "katex-vue3": "^0.0.6"
   }
 }
