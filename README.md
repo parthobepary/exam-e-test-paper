@@ -1,12 +1,9 @@
 # Nuxt 3 + Vuetify 3 Starter
 
-![Starter Image](/public/starter.png)
-Nuxt 3 is now stable. Vuetify 3 is now stable. I will be updating this template as we go along. Feel free to open an issue if you have any questions or suggestions.
-This template here will get you up & running with adding the two together :)
+<!-- ![Starter Image](/public/starter.png) -->
 
 ## Demo Here
 
-[Online Demo](https://vuetify3nuxt3starter.behonbaker.com)
 
 ## How to use
 
@@ -16,12 +13,6 @@ As time passes, I will be updating this template. It will grow with some more pa
 
 <details>
 <summary>Click to see the pages added & planned</summary>
-
-- [x] Login
-- [x] Register
-- [x] Reset Password
-
-</details>
 
 ### Run the app
 
