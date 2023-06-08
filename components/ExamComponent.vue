@@ -6,28 +6,38 @@
             <v-expansion-panel v-for="id, i in data" :key="1" :value="removeP(id.question)" ripple>
                 <div>
                     <v-expansion-panel-title expand-icon="mdi-menu-down">
-                        <p>{{ i + 1 + '.' }} <span v-katex="removeP(id.question )" class="latex"></span></p>
+                        <p>{{ i + 1 + '.' }} <span v-katex="removeP(id.question)" class="latex"></span></p>
                         <template v-slot:actions="{ expanded }">
                             <Icon :name="expanded ? 'codicon:chevron-down' : 'codicon:chevron-up'" color="black" />
                         </template>
                     </v-expansion-panel-title>
                     <div v-if="!getUserRes(id._id)">
                         <v-expansion-panel-text v-model="panel" v-for="t, i in id.options" :key="i">
-                            <v-btn @click="answerQuestion(t, id)">{{ i }} {{ t }}</v-btn>
+                            <v-btn @click="answerQuestion(t, id)">{{ i + 1 + " . " }} <span v-katex="t"></span></v-btn>
                         </v-expansion-panel-text>
                     </div>
                     <div v-else>
                         <v-expansion-panel-text v-model="panel" v-for="t, i in id.options" :key="i">
                             <div :class="id.answer == t ? 'correct_ans' : getUserRes(id._id).ua == t ? 'wrong_ans' : 'user_ans'"
-                            
                                 class="d-flex justify-space-between">
-                                <p>{{ i }} {{ t }}</p>
+                                <p>{{ i }} <span v-katex="t"></span></p>
                                 <p>
                                     <icon
                                         :name="id.answer == t ? 'heroicons-solid:check-circle' : getUserRes(id._id).ua == t ? 'ic:baseline-cancel' : ''" />
                                 </p>
                             </div>
                         </v-expansion-panel-text>
+                        <div v-if="id.explain && id.explain.length">
+                            <div v-if="!isShowExplain" class="flex justify-center py-3">
+                                <button @click="showExplain" class="">See Explanation</button>
+                            </div>
+                            <div v-if="isShowExplain" class="bg-[#FDEAD2] px-3 rounded-md py-3">
+                               <p v-katex="id.explain"></p>
+                            </div>
+                            <div v-if="isShowExplain" class="flex justify-center py-3">
+                                <button @click="hideExplain" class="">Hide Explanation</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </v-expansion-panel>
@@ -40,7 +50,7 @@
 const panel = ref([]);
 const userAnswer = ref([]);
 const ua = ref({});
-const isShowExplain = ref({});
+const isShowExplain = ref(false);
 
 
 const props = defineProps({
@@ -58,9 +68,6 @@ const removeP = (item) => {
     let pera = item?.replace('p', 'span');
     return pera;
 }
-const hideExplain = () => {
-    isShowExplain.value = !isShowExplain.value;
-};
 
 const getDigit = (i) => {
     if (i == 0) return 'a . ';
@@ -69,6 +76,9 @@ const getDigit = (i) => {
     else return 'd . '
 };
 const showExplain = () => {
+    isShowExplain.value = !isShowExplain.value;
+};
+const hideExplain = () => {
     isShowExplain.value = !isShowExplain.value;
 };
 const answerQuestion = (t, id) => {
