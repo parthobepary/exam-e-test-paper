@@ -101,7 +101,7 @@ const hideExplain = (id) => {
     if(index == 0){
         isHide.value.shift();
     }else{
-    isHide.value.splice(1, index);
+    isHide.value.splice(index, 1);
     }
     console.log(index);
     getExplain(id)
