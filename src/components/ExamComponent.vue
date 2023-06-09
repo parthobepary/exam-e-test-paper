@@ -24,9 +24,9 @@
                     </div>
                     <div v-else>
                         <v-expansion-panel-text v-model="panel">
-                            <div v-for="t, i in id.options" :key="i" class="mb-5"
+                            <div v-for="t, i in id.options" :key="i" class="mb-6"
                                 :class="id.answer == t ? 'correct_ans' : getUserRes(id._id).ua == t ? 'wrong_ans' : 'user_ans'">
-                                <div class="d-flex justify-space-between pl-2">
+                                <div class="d-flex justify-space-between align-center pl-2">
                                     <p>{{ getDigit(i) }} <span v-katex="t"></span></p>
                                     <p>
                                         <icon size="30"
@@ -36,17 +36,17 @@
                                 </div>
                             </div>
                             <div v-if="id.explain && id.explain.length" class="">
-                                <div v-if="!isShowExplain" style="display: flex; justify-content: center;">
-                                    <button
+                                <div style="display: flex; justify-content: center;">
+                                    <button v-if="!getExplain(id._id)"
                                         style="color: #045689; border: 1px solid #045689; padding: 8px; border-radius: 10px; margin-bottom: 10px;"
-                                        @click="showExplain(id._id)" class="">See Explanation</button>
+                                        @click="showExplain(id)" class="">See Explanation</button>
                                 </div>
-                                <div v-if="isShowExplain" class="bg-[#FDEAD2] px-3 rounded-md py-3">
+                                <div v-if="getExplain(id._id)" class="bg-[#FDEAD2] px-3 rounded-md py-3">
                                     <p><span style="color: #045689;">Explain : </span><span
-                                            v-katex="removeP(id.explain)"></span></p>
+                                            v-katex="removeP(getExplain(id._id).explain)"></span></p>
                                 </div>
-                                <div v-if="isShowExplain" style="display: flex; justify-content: center;">
-                                    <button @click="hideExplain(id._id)"
+                                <div v-if="getExplain(id._id)" style="display: flex; justify-content: center;">
+                                    <button @click="hideExplain(id)"
                                         style="color: #045689; border: 1px solid #045689; padding: 8px; border-radius: 10px; margin-bottom: 10px;">Hide
                                         Explanation</button>
                                 </div>
@@ -65,6 +65,7 @@ const panel = ref([]);
 const userAnswer = ref([]);
 const ua = ref({});
 const isShowExplain = ref(false);
+const isHide = ref([])
 
 
 const props = defineProps({
@@ -91,9 +92,19 @@ const getDigit = (i) => {
 };
 const showExplain = (id) => {
     isShowExplain.value = !isShowExplain.value;
+    isHide.value.push(id);
+    getExplain(id)
 };
 const hideExplain = (id) => {
     isShowExplain.value = !isShowExplain.value;
+    const index = isHide.value.indexOf(id);
+    if(index == 0){
+        isHide.value.shift();
+    }else{
+    isHide.value.splice(1, index);
+    }
+    console.log(index);
+    getExplain(id)
 };
 const answerQuestion = (t, id) => {
     ua.value = id
@@ -108,24 +119,27 @@ const getUserRes = (id) => {
     return userAnswer.value.find(u => u.re._id == id);
     // console.log(id);
 }
+const getExplain = (id) => {
+    return isHide.value.find( u => u._id == id )
+}
 </script>
   
 <style lang="scss" scoped>
 .user_ans {
     background-color: #F3F4FA !important;
-    padding: 10px 6px;
+    padding: 7.5px 2px;
     border-radius: 10px;
 }
 
 .wrong_ans {
     background-color: rgb(245, 224, 224) !important;
-    padding: 10px 6px;
+    padding: 7.5px 2px;
     border-radius: 10px;
 }
 
 .correct_ans {
     background-color: #DDF5FF !important;
-    padding: 10px 6px;
+    padding: 7.5px 2px;
     border-radius: 10px;
 }
 // vuetify overwrite css
