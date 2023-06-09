@@ -11,7 +11,7 @@
                         <p>{{ i + 1 + '.' }} <span style="line-height: 1.4rem;" v-katex="removeP(id.question)"
                                 class="latex"></span></p>
                         <template v-slot:actions="{ expanded }">
-                            <Icon :name="expanded ? 'codicon:chevron-down' : 'codicon:chevron-up'" color="#0364A6" />
+                            <Icon :name="expanded ? 'codicon:chevron-up' : 'codicon:chevron-down'" color="#0364A6" />
                         </template>
                     </v-expansion-panel-title>
                     <div v-if="!getUserRes(id._id)">
