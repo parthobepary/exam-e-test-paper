@@ -30,7 +30,7 @@
                                     <p>
                                         <icon size="30"
                                             :color="id.answer == t ? '#31CB18' : getUserRes(id._id).ua == t ? 'red' : ''"
-                                            :name="id.answer == t ? 'heroicons-solid:check-circle' : getUserRes(id._id).ua == t ? 'ic:baseline-cancel' : ''" />
+                                            :name="id.answer == t ? getUserRes(id._id).ua == t ? 'heroicons-solid:check-circle' : '' : getUserRes(id._id).ua == t ? 'ic:baseline-cancel' : ''" />
                                     </p>
                                 </div>
                             </div>
