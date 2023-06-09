@@ -1,6 +1,5 @@
 <template>
     <div>
-        <h1>test paper</h1>
         <ExamComponent :data="items"/>
     </div>
 </template>
