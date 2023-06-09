@@ -4,7 +4,6 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "reset": "rm -rf .nuxt node_modules .output package-lock.json && npm install",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
@@ -18,8 +17,9 @@
     "vuetify": "^3.1.15"
   },
   "dependencies": {
-    "vite-plugin-vuetify": "^1.0.2",
+    "@hsorby/vue3-katex": "^0.6.0-rc.5",
     "katex": "^0.16.4",
-    "katex-vue3": "^0.0.6"
+    "katex-vue3": "^0.0.6",
+    "vite-plugin-vuetify": "^1.0.2"
   }
 }

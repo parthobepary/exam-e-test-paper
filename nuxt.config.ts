@@ -9,6 +9,8 @@ const url = "";
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+  ssr: false,
+  srcDir: 'src/',
   // import styles
   css: ["@/assets/main.scss"],
   // enable takeover mode
