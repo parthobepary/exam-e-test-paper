@@ -1,6 +1,15 @@
 <template>
     <div>
-        <ExamComponent :data="items"/>
+        <div v-if="isLoading">
+            <div class="d-flex justify-center align-center h-screen">
+                <p>Loading ...</p>
+            </div>
+        </div>
+        <div v-else style="background-color: #F3F4FA;">
+            <div class="px-3">
+                <ExamComponent :data="items" />
+            </div>
+        </div>
     </div>
 </template>
 <script setup>
@@ -19,7 +28,6 @@ const isLoading = ref(false);
 //function
 
 const init = async () => {
-    console.log('jjjj');
     isLoading.value = true;
     const { data, pending, error } = await useFetch(`https://api.e-testpaper.com/api/boards/${id}/${question}/${year}/?subject_id=${subject_id}&type=${type}&fbclid=${fbcl_id}`)
     if (error && error._value) {
