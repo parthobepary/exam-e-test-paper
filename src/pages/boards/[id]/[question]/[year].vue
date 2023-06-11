@@ -15,7 +15,6 @@
 <script setup>
 const items = ref([]);
 
-
 const route = useRoute();
 const subject_id = route?.query.subject_id;
 const type = route?.query.type;
