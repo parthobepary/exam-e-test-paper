@@ -6,7 +6,7 @@
             </div>
         </div>
         <div v-else style="background-color: #F3F4FA;">
-            <div class="px-3">
+            <div style="padding: 25px 20px;">
                 <ExamComponent :data="items" />
             </div>
         </div>

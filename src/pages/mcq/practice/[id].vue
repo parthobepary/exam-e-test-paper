@@ -1,3 +1,18 @@
+<!-- <template>
+    <div>
+        <div v-if="isLoading">
+            <div class="d-flex justify-center align-center h-screen">
+                <p>Loading ...</p>
+            </div>
+        </div>
+        <div v-else>
+
+
+        </div>
+    </div>
+</template>
+<!-->
+
 <template>
     <div>
         <div v-if="isLoading">
@@ -6,7 +21,7 @@
             </div>
         </div>
         <div v-else>
-            <div class="d-flex justify-space-between btn-body mt-1 mb-3">
+            <div class="sticky d-flex justify-space-between btn-body">
                 <div style="padding: 5px 0px; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;"
                     class="first-btn" :class="!isActive ? 'active' : ''">
                     <button @click="first">জ্ঞান ও অনুধাবন</button>
@@ -20,19 +35,22 @@
                     </div>
                 </div>
             </div>
-            <div style="background-color: #F3F4FA;">
-                <div class="px-3">
-                    <div v-if="question && question.length">
-                        <ExamComponent :data="question" />
-                    </div>
-                    <div v-else>
-                        <p class="px-2 text-center mt-5 py-3">No question here</p>
+            <div>
+                <div style="background-color: #F3F4FA;">
+                    <div style="padding: 25px 20px;">
+                        <div v-if="question && question.length">
+                            <ExamComponent :data="question" />
+                        </div>
+                        <div v-else>
+                            <p class="px-2 text-center mt-5 py-3">No question here</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
 <script setup>
 
 const items = ref([]);
@@ -113,12 +131,14 @@ const second = () => {
 }
 
 </script>
+
 <style scoped>
 .btn-body {
-    background: rgba(4, 86, 137, 0.2);
-    margin: 0px 5px;
+    background: #CDDDE7;
+    margin: 10px 20px;
     border-radius: 10px;
     padding: 10px 5px;
+    position: static;
 }
 
 .active {
@@ -135,4 +155,12 @@ const second = () => {
     width: 100%;
     padding: 10px 0px;
     border-radius: 10px;
-}</style>
+}
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 199;
+}
+</style>
