@@ -1,17 +1,3 @@
-<!-- <template>
-    <div>
-        <div v-if="isLoading">
-            <div class="d-flex justify-center align-center h-screen">
-                <p>Loading ...</p>
-            </div>
-        </div>
-        <div v-else>
-
-
-        </div>
-    </div>
-</template>
-<!-->
 
 <template>
     <div>

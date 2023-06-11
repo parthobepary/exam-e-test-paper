@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-expansion-panels multiple>
-            <v-expansion-panel inset elevation="0" elevation-24
+            <v-expansion-panel elevation="0"
                 style="margin-bottom: 15px !important; border-radius: 10px !important;" v-for="id, i in data" :key="i"
                 :value="removeP(id.question)">
                 <div>
@@ -143,27 +143,6 @@ const getExplain = (id) => {
     border-radius: 10px;
 }
 
-// .user_ans {
-//     background-color: #EAF7EE !important;
-//     padding: 7.5px 2px;
-//     border: 1px solid #009456;
-//     border-radius: 10px;
-// }
-
-// .wrong_ans {
-//     background-color: #FBEDEA !important;
-//     padding: 7.5px 2px;
-//     border: 1px solid #ED4E2B;
-//     border-radius: 10px;
-// }
-
-// .correct_ans {
-//     background-color: #EAF7EE !important;
-//     padding: 7.5px 2px;
-//     border: 1px solid #009456;
-//     border-radius: 10px;
-// }
-
 .explain {
     background: rgba(247, 148, 29, 0.2);
     border-radius: 8px;
@@ -192,6 +171,16 @@ const getExplain = (id) => {
 }
 
 :deep() {
+    .v-expansion-panel:not(:first-child)::after {
+    border-top-style: none !important; 
+    border-top-width: none !important; 
+    content: "";
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: 0.3s opacity cubic-bezier(0.4, 0, 0.2, 1) !important; 
+}
     .v-expansion-panel-title__overlay {
         position: absolute;
         top: 0;
