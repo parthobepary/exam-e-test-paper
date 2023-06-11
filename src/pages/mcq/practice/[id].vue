@@ -22,16 +22,16 @@
         </div>
         <div v-else>
             <div class="sticky d-flex justify-space-between btn-body">
-                <div style="padding: 5px 0px; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;"
+                <div style="padding: 5px; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;"
                     class="first-btn" :class="!isActive ? 'active' : ''">
                     <button @click="first">জ্ঞান ও অনুধাবন</button>
-                    <div v-if="!isActive" style="width: 40px; height: 3px; background-color: #2E3192; margin: 3px 0px;">
+                    <div v-if="!isActive" style="width: 40px; height: 3px; background-color: #2E3192; margin: 3px;">
                     </div>
                 </div>
-                <div style="padding: 5px 0px; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;"
+                <div style="padding: 5px; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;"
                     class="first-btn" :class="isActive ? 'active' : ''">
                     <button @click="second">প্রয়োগ ও উচ্চতর দক্ষতা</button>
-                    <div v-if="isActive" style="width: 40px; height: 3px; background-color: #2E3192; margin: 3px; 0px">
+                    <div v-if="isActive" style="width: 40px; height: 3px; background-color: #2E3192; margin: 3px;">
                     </div>
                 </div>
             </div>
@@ -42,7 +42,9 @@
                             <ExamComponent :data="question" />
                         </div>
                         <div v-else>
-                            <p class="px-2 text-center mt-5 py-3">No question here</p>
+                            <div class="d-flex justify-center align-center h-screen w-full">
+                                <p class="px-2 text-center mt-5 py-3">No question here</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -143,6 +145,7 @@ const second = () => {
 
 .active {
     background-color: white;
+    margin: 0px 5px;
 }
 
 .first-btn {
