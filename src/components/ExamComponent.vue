@@ -9,6 +9,7 @@
                         style="background-color: white !important; border-radius: 10px !important; padding: 10px !important;">
                         <p>{{ i + 1 + '.' }} <span style="line-height: 1.4rem;" v-katex="removeP(id.question)"
                                 class="latex"></span></p>
+                                <!-- {{ removeP(id.question) }} -->
                         <template v-slot:actions="{ expanded }">
                             <img :src="expanded ? '/images/u.svg' : '/images/d.svg'" alt="">
                         </template>
@@ -16,7 +17,7 @@
                     <div v-if="!getUserRes(id._id)">
                         <v-expansion-panel-text v-model="panel" v-for="t, i in id.options" :key="i">
                             <button
-                                style="padding: 10px; border-radius: 10px; background-color: #F3F4FA !important; text-align: justify !important; width: 100% !important;"
+                                style="padding: 10px; border-radius: 10px; font-size: 14px !important; background-color: #F3F4FA !important; text-align: justify !important; width: 100% !important;"
                                 @click="answerQuestion(t, id)">{{ getDigit(i) }} <span v-katex="t"></span></button>
                         </v-expansion-panel-text>
                     </div>
@@ -25,9 +26,9 @@
                             <div v-for="t, i in id.options" :key="i" class="mb-2"
                                 :class="id.answer == t ? 'correct_ans' : getUserRes(id._id).ua == t ? 'wrong_ans' : 'user_ans'">
                                 <div class="d-flex justify-space-between align-center" style="padding: 0px 10px;">
-                                    <p>{{ getDigit(i) }} <span v-katex="t"></span></p>
+                                    <p style="font-size: 14px !important;">{{ getDigit(i) }} <span v-katex="t"></span></p>
                                     <p>
-                                        <icon size="30"
+                                        <icon size="24"
                                             :color="id.answer == t ? '#31CB18' : getUserRes(id._id).ua == t ? 'red' : ''"
                                             :name="id.answer == t ? getUserRes(id._id).ua == t ? 'heroicons-solid:check-circle' : '' : getUserRes(id._id).ua == t ? 'ic:baseline-cancel' : ''" />
                                     </p>
@@ -36,7 +37,7 @@
                             <div v-if="id.explain && id.explain.length" class="">
                                 <div style="display: flex; justify-content: center;">
                                     <button v-if="!getExplain(id._id)"
-                                        style="color: #045689; border: 1px solid #045689; padding: 2px 15px; border-radius: 8px; margin: 10px 0px;"
+                                        style="color: #045689; border: 1px solid #045689; padding: 2px 15px; font-size: 14px !important; border-radius: 8px; margin: 10px 0px;"
                                         @click="showExplain(id)" class="">See Explanation</button>
                                 </div>
                                 <div v-if="getExplain(id._id)" class="explain">
@@ -78,7 +79,7 @@ const props = defineProps({
 // function
 
 const removeP = (item) => {
-    let pera = item?.replace('p', 'span');
+    let pera = item?.replace(/<br\s*\/?>/g, '').replace(/<p[^>]*>/g, '<span>').replace(/<\/p>/g, '</span>');
     return pera;
 }
 
@@ -152,23 +153,7 @@ const getExplain = (id) => {
 
 // vuetify overwrite css
 
-.gradient-text {
-    /* Fallback: Set a background color. */
-    background-color: red;
 
-    /* Create the gradient. */
-    background-image: linear-gradient(45deg, #f3ec78, #af4261);
-
-    /* Set the background size and repeat properties. */
-    background-size: 100%;
-    background-repeat: repeat;
-
-    /* Use the text as a mask for the background. */
-    /* This will show the gradient as a text color rather than element bg. */
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    -moz-text-fill-color: transparent;
-}
 
 :deep() {
     .v-expansion-panel:not(:first-child)::after {
